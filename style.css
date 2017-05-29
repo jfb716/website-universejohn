@@ -1,0 +1,11 @@
+.meters {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #292b2c;
+}
+
+#home_div {
+  background-color: #292b2c;
+}
