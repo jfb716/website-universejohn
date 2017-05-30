@@ -11,62 +11,61 @@
 
     $json = json_encode($myArray);
 
-    $arr = json_decode($json);
+    $arr = json_decode($json, true);
 
-    $JWCount = 0;
-    $OWCount = 0;
-    $DWCount = 0;
-    $AWCount = 0;
+    $JohnW = 0;
+    $AmitW = 0;
+    $DavidW = 0;
+    $OlegW = 0;
+    $TotalG = 0;
+    $AmitH = 0;
+    $JohnH = 0;
+    $OlegH = 0;
+    $DavidH = 0;
 
     foreach ($arr as $key => $jsons) {
       foreach ($jsons as $key => $value) {
         if ($key == 'winner' && $value == 'John') {
-          $JWCount++;
+          $JohnW++;
         }
         elseif ($key == 'winner' && $value == 'Oleg') {
-          $OWCount++;
+          $OlegW++;
         }
         elseif ($key == 'winner' && $value == 'David') {
-          $DWCount++;
+          $DavidW++;
         }
-        elseif ($key == 'winner' && $value == "Amit") {
-          $AWCount++;
+        elseif ($key == 'winner' && $value == 'Amit') {
+          $AmitW++;
         }
-      }
-    }
-
-    echo "John's Wins: " . $JWCount . '<br>';
-
-    $JHCount = 0;
-    $OHCount = 0;
-    $DHCount = 0;
-    $AHCount = 0;
-
-    foreach ($arr as $key => $jsons) {
-      foreach ($jsons as $key => $value) {
-        if ($key == 'home' && $value == 'John') {
-          $JHCount++;
+        elseif ($key == 'id') {
+          $TotalG++;
+        }
+        elseif ($key == 'home' && $value == 'Amit') {
+          $AmitH++;
         }
         elseif ($key == 'home' && $value == 'Oleg') {
-          $OHCount++;
+          $OlegH++;
+        }
+        elseif ($key == 'home' && $value == 'John') {
+          $JohnH++;
         }
         elseif ($key == 'home' && $value == 'David') {
-          $DHCount++;
-        }
-        elseif ($key == 'home' && $value == "Amit") {
-          $AHCount++;
+          $DavidH++;
         }
       }
     }
 
-    echo "John's Home Games: " . $JHCount . '<br>';
-    echo "Oleg's Home Games: " . $OHCount . '<br>';
-    echo "David's Home Games: " . $DHCount . '<br>';
-    echo "Amit's Home Games: " . $AHCount . '<br>';
+    $JohnP = round(($JohnW / $TotalG) * 100);
+    $AmitP = round(($AmitW / $TotalG) * 100);
+    $DavidP = round(($DavidW / $TotalG) * 100);
+    $OlegP = round(($OlegW / $TotalG) * 100);
+
+    $JohnHP = round(($JohnH / $TotalG) * 100);
+    $AmitHP = round(($AmitH / $TotalG) * 100);
+    $DavidHP = round(($DavidH / $TotalG) * 100);
+    $OlegHP = round(($OlegH / $TotalG) * 100);
 
 ?>
-
-
 
 <!DOCTYPE html>
 <html>
@@ -82,102 +81,72 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-      <h2>Total Wins</h2>
-      <div class="meters">
-        <div id="chart1_div" style="width: 220px; height: 220px;"></div>
-        <div id="chart2_div" style="width: 220px; height: 220px;"></div>
-        <div id="chart3_div" style="width: 220px; height: 220px;"></div>
-        <div id="chart4_div" style="width: 220px; height: 220px;"></div>
+
+      <div class="charts">
+        <div id="winp_chart_div"></div>
+        <div id="homep_chart_div"></div>
       </div>
-      <br>
-       <div id="home_div"></div>
+
     </body>
 
 
 
-<script type="text/javascript">
-google.charts.load('current', {packages: ['corechart', 'bar', 'gauge']});
-google.charts.setOnLoadCallback(drawWinsChart);
-google.charts.setOnLoadCallback(drawGoalsChart);
+    <script>
+    google.charts.load('current', {'packages':['corechart', 'annotationchart']});
+    google.charts.setOnLoadCallback(drawWinPChart);
+    google.charts.setOnLoadCallback(drawHomePChart);
 
-  var JBH = <?php echo $JHCount; ?>;
-  var ABH = <?php echo $AHCount; ?>;
-  var ORH = <?php echo $OHCount; ?>;
-  var DRH = <?php echo $DHCount; ?>;
+    var JP = <?php echo $JohnP ?>;
+    var OP = <?php echo $OlegP ?>;
+    var AP = <?php echo $AmitP ?>;
+    var DP = <?php echo $DavidP ?>;
 
-  function drawGoalsChart() {
-    var dataGoals = google.visualization.arrayToDataTable([
-      ['Player', 'Home'],
-      ['John', JBH, ],
-      ['David', DRH, ],
-      ['Amit', ABH, ],
-      ['Oleg', ORH, ]
-    ]);
+    var JHP = <?php echo $JohnHP ?>;
+    var OHP = <?php echo $OlegHP ?>;
+    var AHP = <?php echo $AmitHP ?>;
+    var DHP = <?php echo $DavidHP ?>;
 
-    var optionsGoals = {
-      title: 'Total Home Games',
-      chartArea: {width: '30%'},
-      hAxis: {
-        title: 'Home',
-        minValue: 0
-      },
-      vAxis: {
-        title: 'Players'
-      }
-    };
+    function drawWinPChart() {
 
-    var chart5 = new google.visualization.BarChart(document.getElementById('home_div'));
-    chart5.draw(dataGoals, optionsGoals);
-  }
+     var data = new google.visualization.DataTable();
+     data.addColumn('string', 'Player');
+     data.addColumn('number', 'Win Percent');
+     data.addRows([
+       ['John', JP],
+       ['Amit', AP],
+       ['David', DP],
+       ['Oleg', OP]
+     ]);
 
+     var options = {title:'Percentage of Total Wins',
+                    width:400,
+                    height:300};
 
-  var JB = <?php echo $JWCount; ?>;
-  var AB = <?php echo $AWCount; ?>;
-  var OR = <?php echo $OWCount; ?>;
-  var DR = <?php echo $DWCount; ?>;
+     var chart = new google.visualization.PieChart(document.getElementById('winp_chart_div'));
+     chart.draw(data, options);
+    }
 
-  function drawWinsChart() {
+    function drawHomePChart() {
 
-    var data1 = google.visualization.arrayToDataTable([
-      ['Label', 'Value'],
-      ['Amit', AB],
-    ]);
+     var data = new google.visualization.DataTable();
+     data.addColumn('string', 'Player');
+     data.addColumn('number', 'Home Percent');
+     data.addRows([
+       ['John', JHP],
+       ['Amit', AHP],
+       ['David', DHP],
+       ['Oleg', OHP]
+     ]);
 
-    var data2 = google.visualization.arrayToDataTable([
-      ['Label', 'Value'],
-      ['John', JB],
-    ]);
+     var options = {title:'Percentage of Total Home Games',
+                    width:400,
+                    height:300};
 
-    var data3 = google.visualization.arrayToDataTable([
-      ['Label', 'Value'],
-      ['Oleg', OR],
-    ]);
-
-    var data4 = google.visualization.arrayToDataTable([
-      ['Label', 'Value'],
-      ['David', DR],
-    ]);
-
-    var options = {
-      width: 220, height: 220,
-      redFrom: 0, redTo: 50,
-      greenFrom: 50, greenTo: 100,
-      minorTicks: 5
-    };
+     var chart = new google.visualization.PieChart(document.getElementById('homep_chart_div'));
+     chart.draw(data, options);
+    }
+    </script>
 
 
-
-    var chart1 = new google.visualization.Gauge(document.getElementById('chart1_div'));
-    var chart2 = new google.visualization.Gauge(document.getElementById('chart2_div'));
-    var chart3 = new google.visualization.Gauge(document.getElementById('chart3_div'));
-    var chart4 = new google.visualization.Gauge(document.getElementById('chart4_div'));
-
-    chart1.draw(data1, options);
-    chart2.draw(data2, options);
-    chart3.draw(data3, options);
-    chart4.draw(data4, options);
-
-  }
-</script>
 
 </html>
