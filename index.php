@@ -1,71 +1,4 @@
-<?php
-    $conn = mysqli_connect('localhost', 'galacticJohn', 'bull1607', 'galacticJohn');
-    $sql = "SELECT * FROM xboxTracker";
-    $result = mysqli_query($conn, $sql);
-    $myArray = array();
-    while ($row = mysqli_fetch_assoc($result)) {
-    $myArray[] = $row;
-    }
 
-    mysqli_close($conn);
-
-    $json = json_encode($myArray);
-
-    $arr = json_decode($json, true);
-
-    $JohnW = 0;
-    $AmitW = 0;
-    $DavidW = 0;
-    $OlegW = 0;
-    $TotalG = 0;
-    $AmitH = 0;
-    $JohnH = 0;
-    $OlegH = 0;
-    $DavidH = 0;
-
-    foreach ($arr as $key => $jsons) {
-      foreach ($jsons as $key => $value) {
-        if ($key == 'winner' && $value == 'John') {
-          $JohnW++;
-        }
-        elseif ($key == 'winner' && $value == 'Oleg') {
-          $OlegW++;
-        }
-        elseif ($key == 'winner' && $value == 'David') {
-          $DavidW++;
-        }
-        elseif ($key == 'winner' && $value == 'Amit') {
-          $AmitW++;
-        }
-        elseif ($key == 'id') {
-          $TotalG++;
-        }
-        elseif ($key == 'home' && $value == 'Amit') {
-          $AmitH++;
-        }
-        elseif ($key == 'home' && $value == 'Oleg') {
-          $OlegH++;
-        }
-        elseif ($key == 'home' && $value == 'John') {
-          $JohnH++;
-        }
-        elseif ($key == 'home' && $value == 'David') {
-          $DavidH++;
-        }
-      }
-    }
-
-    $JohnP = round(($JohnW / $TotalG) * 100);
-    $AmitP = round(($AmitW / $TotalG) * 100);
-    $DavidP = round(($DavidW / $TotalG) * 100);
-    $OlegP = round(($OlegW / $TotalG) * 100);
-
-    $JohnHP = round(($JohnH / $TotalG) * 100);
-    $AmitHP = round(($AmitH / $TotalG) * 100);
-    $DavidHP = round(($DavidH / $TotalG) * 100);
-    $OlegHP = round(($OlegH / $TotalG) * 100);
-
-?>
 
 <!DOCTYPE html>
 <html>
@@ -77,76 +10,116 @@
         <meta name="description" content="Test Site for John F. Black">
         <meta name="keywords" content="John, John Black, John F Black, John F. Black, John Francis Black, Test Site, Test, Synacor, Facebook, NBC, NBCUniversal, LocalEdge, Buffalo, New York, New York City, NYC, Grand Island, University at Buffalo, UB, Technical Support, Ad Operations, AdOps, AdTech">
         <title>UniverseJohn</title>
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <link rel="stylesheet" href="style.css">
+        <script>
+          var PREBID_TIMEOUT = 700;
+
+          var adUnits = [{
+              code: 'div-gpt-ad-1',
+              sizes: [[300, 250]],
+              bids: [{
+                  bidder: 'audienceNetwork',
+                  params: {
+                     placementId: '118220978561571_346529649064035',
+                     fullwidth: true
+                  }
+              }]
+          }];
+
+          var pbjs = pbjs || {};
+          pbjs.que = pbjs.que || [];
+
+        </script>
+
+        <script type="text/javascript" src="prebid.js" async></script>
+
+        <script>
+            var googletag = googletag || {};
+            googletag.cmd = googletag.cmd || [];
+            googletag.cmd.push(function() {
+                googletag.pubads().disableInitialLoad();
+            });
+
+            pbjs.bidderSettings = {
+                    standard: {
+                        adserverTargeting: [
+                             {
+                         key: "fb_bidid",
+                        val: function (bidResponse) {
+                            console.log('Bid Response Bid ID: ' + bidResponse.fbBidId);
+                            return bidResponse.fbBidId;
+                         }
+                            },
+                            {
+                                key: "hb_bidder",
+                                val: function (bidResponse) {
+                                    console.log('Bid Response Bidder Name: ' + bidResponse.bidderCode);
+                                    return bidResponse.bidderCode;
+                                }
+                            }, {
+                                key: "hb_adid",
+                                val: function (bidResponse) {
+                                    console.log('Bid Response Ad ID: ' + bidResponse.adId);
+                                    return bidResponse.adId;
+                                }
+                            }, {
+                                key: "hb_pb",
+                                val: function (bidResponse) {
+                                    console.log('Bid Response Bid Price: ' + bidResponse.pbMg);
+                                    return '20.00';
+                                }
+                            }
+                        ]
+                    },
+
+                };
+
+            pbjs.que.push(function() {
+                pbjs.addAdUnits(adUnits);
+                pbjs.requestBids({
+                    bidsBackHandler: sendAdserverRequest
+                });
+            });
+
+            function sendAdserverRequest() {
+                if (pbjs.adserverRequestSent) return;
+                pbjs.adserverRequestSent = true;
+                googletag.cmd.push(function() {
+                    pbjs.que.push(function() {
+                        pbjs.setTargetingForGPTAsync();
+                        console.log("Key Values Appended");
+                        googletag.pubads().refresh();
+                    });
+                });
+            }
+
+            setTimeout(function() {
+                sendAdserverRequest();
+            }, PREBID_TIMEOUT);
+
+
+          </script>
+
+          <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+
+          <script>
+              googletag.cmd.push(function() {
+                googletag.defineSlot('/27721068/header_bidding', [300, 250], 'div-gpt-ad-1').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+              });
+            </script>
+
     </head>
     <body>
-
-      <div class="charts">
-        <div id="winp_chart_div"></div>
-        <div id="homep_chart_div"></div>
+      <p>Fullwidth - Prebid.js v24.1</p>
+      <div id='div-gpt-ad-1' style='height:250px; width:300px;'>
+        <script>
+          googletag.cmd.push(function() { googletag.display('div-gpt-ad-1'); });
+        </script>
       </div>
 
     </body>
-
-
-
-    <script>
-    google.charts.load('current', {'packages':['corechart', 'annotationchart']});
-    google.charts.setOnLoadCallback(drawWinPChart);
-    google.charts.setOnLoadCallback(drawHomePChart);
-
-    var JP = <?php echo $JohnP ?>;
-    var OP = <?php echo $OlegP ?>;
-    var AP = <?php echo $AmitP ?>;
-    var DP = <?php echo $DavidP ?>;
-
-    var JHP = <?php echo $JohnHP ?>;
-    var OHP = <?php echo $OlegHP ?>;
-    var AHP = <?php echo $AmitHP ?>;
-    var DHP = <?php echo $DavidHP ?>;
-
-    function drawWinPChart() {
-
-     var data = new google.visualization.DataTable();
-     data.addColumn('string', 'Player');
-     data.addColumn('number', 'Win Percent');
-     data.addRows([
-       ['John', JP],
-       ['Amit', AP],
-       ['David', DP],
-       ['Oleg', OP]
-     ]);
-
-     var options = {title:'Percentage of Total Wins',
-                    width:400,
-                    height:300};
-
-     var chart = new google.visualization.PieChart(document.getElementById('winp_chart_div'));
-     chart.draw(data, options);
-    }
-
-    function drawHomePChart() {
-
-     var data = new google.visualization.DataTable();
-     data.addColumn('string', 'Player');
-     data.addColumn('number', 'Home Percent');
-     data.addRows([
-       ['John', JHP],
-       ['Amit', AHP],
-       ['David', DHP],
-       ['Oleg', OHP]
-     ]);
-
-     var options = {title:'Percentage of Total Home Games',
-                    width:400,
-                    height:300};
-
-     var chart = new google.visualization.PieChart(document.getElementById('homep_chart_div'));
-     chart.draw(data, options);
-    }
-    </script>
-
 
 
 </html>
