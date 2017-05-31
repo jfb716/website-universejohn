@@ -21,7 +21,7 @@
                   bidder: 'audienceNetwork',
                   params: {
                      placementId: '118220978561571_346529649064035',
-                     fullwidth: true
+                     format: 'fullwidth'
                   }
               }]
           }];
@@ -113,12 +113,15 @@
     </head>
     <body>
       <p>Fullwidth - Prebid.js v24.1</p>
+      <hr>
+      <br>
       <div id='div-gpt-ad-1' style='height:250px; width:300px;'>
         <script>
           googletag.cmd.push(function() { googletag.display('div-gpt-ad-1'); });
         </script>
       </div>
-
+      <br>
+      <hr>
     </body>
 
 
