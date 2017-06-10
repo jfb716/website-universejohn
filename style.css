@@ -1,0 +1,15 @@
+.details {
+  text-align: center;
+  line-height: 2px;
+}
+
+html {
+  background-color: #292b2c;
+  color: white;
+  text-align: center;
+}
+
+.adSlot1, .adSlot2, .adSlot3 {
+  background-color: grey;
+  margin: auto;
+}
