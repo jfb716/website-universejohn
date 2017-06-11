@@ -11,6 +11,8 @@
         <link rel="stylesheet" href="style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+        </script>
+
       <script>
           var PREBID_TIMEOUT = 2000;
 
@@ -74,13 +76,6 @@
           pbjs.bidderSettings = {
                     standard: {
                         adserverTargeting: [
-                             {
-                         key: "fb_bidid",
-                        val: function (bidResponse) {
-                            console.log('Bid Response Bid ID: ' + bidResponse.bidid);
-                            return bidResponse.bidid;
-                         }
-                            },
                             {
                                 key: "hb_bidder",
                                 val: function (bidResponse) {
@@ -99,11 +94,7 @@
                                     console.log('Bid Response Bid Price: ' + bidResponse.pbMg);
                                     return '20.00';
                                 }
-                            }
-                        ]
-                    },
-
-                };
+                            }]}};
 
           pbjs.que.push(function() {
               pbjs.addAdUnits(adUnits);
@@ -118,9 +109,8 @@
               googletag.cmd.push(function() {
                   pbjs.que.push(function() {
                       pbjs.setTargetingForGPTAsync();
-                  });
-              });
-          }
+                      googletag.pubads().refresh([slot1, slot4, slot5]);
+                  });});};
 
           setTimeout(function() {
               sendAdserverRequest();
@@ -198,110 +188,45 @@
       </div>
     </body>
     <script>
-      var refreshed1 = false;
+
       var refreshed2 = false;
       var refreshed3 = false;
-      var refreshed4 = false;
-      var refreshed5 = false;
 
-      var listener1 = function() {
-        if (window.scrollY >= div1H1 && !refreshed1) {
-          googletag.cmd.push(function() {
-            googletag.pubads().refresh([slot1]);
-          });
-
-          refreshed1 = true;
-
-          window.removeEventListener('scroll', listener1);
-          window.addEventListener('scroll', listener2);
-        }
-      }
-
-      var listener2 = function() {
+      var listener = function() {
         if (window.scrollY >= div2H2 && !refreshed2) {
           googletag.cmd.push(function() {
             googletag.pubads().refresh([slot2]);
           });
-
           refreshed2 = true;
-
-          window.removeEventListener('scroll', listener2);
-          window.addEventListener('scroll', listener3);
-        }
-      }
-
-      var listener3 = function() {
-        if (window.scrollY >= div3H3 && !refreshed3) {
+        } else if (window.scrollY >= div3H3 && !refreshed3) {
           googletag.cmd.push(function() {
             googletag.pubads().refresh([slot3]);
           });
-
           refreshed3 = true;
-
-          window.removeEventListener('scroll', listener3);
-        }
-      }
-
-      var listener4 = function() {
-        if (window.scrollY >= div4H4 && !refreshed4) {
-          googletag.cmd.push(function() {
-            googletag.pubads().refresh([slot4]);
-          });
-
-          refreshed4 = true;
-
-          window.removeEventListener('scroll', listener4);
-        }
-      }
-
-      var listener5 = function() {
-        if (window.scrollY >= div5H5 && !refreshed5) {
-          googletag.cmd.push(function() {
-            googletag.pubads().refresh([slot5]);
-          });
-
-          refreshed5 = true;
-
-          window.removeEventListener('scroll', listener5);
-        }
-      }
-      window.addEventListener('scroll', listener1);
-      window.addEventListener('scroll', listener4);
-      window.addEventListener('scroll', listener5);
+          window.removeEventListener('scroll', listener);
+        };
+      };
 
       var listener52 = function(){
             var window_top = window.scrollY;
             var div_top = document.querySelector(".anchor").offsetTop;
-            console.log(div_top);
             if (window_top > div_top){
                 $(".adSlot5").addClass("sticky");
             }else {
                 $(".adSlot5").removeClass("sticky");
-              }
-      }
+              };
+      };
 
+      window.addEventListener('scroll', listener);
       window.addEventListener('scroll', listener52);
-
-      var div1 = document.querySelector(".adSlot1");
-      var div1H = div1.offsetTop;
-      var div1H1 = div1H - 300;
 
       var div2 = document.querySelector(".adSlot2");
       var div2H = div2.offsetTop;
-      var div2H2 = div2H - 300;
+      var div2H2 = div2H - 600;
 
       var div3 = document.querySelector(".adSlot3");
       var div3H = div3.offsetTop;
-      var div3H3 = div3H - 300;
-
-      var div4 = document.querySelector(".adSlot4");
-      var div4H4 = 1;
-
-      var div5 = document.querySelector(".adSlot5");
-      var div5H5 = 1;
-
+      var div3H3 = div3H - 600;
 
     </script>
-
-
 </html>
