@@ -9,6 +9,7 @@
         <meta name="keywords" content="John, John Black, John F Black, John F. Black, John Francis Black, Test Site, Test, Synacor, Facebook, NBC, NBCUniversal, LocalEdge, Buffalo, New York, New York City, NYC, Grand Island, University at Buffalo, UB, Technical Support, Ad Operations, AdOps, AdTech">
         <title>UniverseJohn</title>
         <link rel="stylesheet" href="style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
       <script>
           var PREBID_TIMEOUT = 2000;
@@ -28,7 +29,7 @@
               bids: [{
                   bidder: 'audienceNetwork',
                   params: {
-                     placementId: '118220978561571_429341297449536'
+                     placementId: '118220978561571_429341297449536',
                   }
               }]
           },{
@@ -40,6 +41,24 @@
                      placementId: '118220978561571_429341410782858'
                   }
               }]
+          },{
+            code: 'div-gpt-ad-4',
+            sizes: [[320, 50]],
+            bids: [{
+              bidder: 'audienceNetwork',
+              params: {
+                placementId: '118220978561571_429550137428652'
+              }
+            }]
+          },{
+            code: 'div-gpt-ad-5',
+            sizes: [[320, 50]],
+            bids: [{
+              bidder: 'audienceNetwork',
+              params: {
+                placementId: '118220978561571_429556677427998'
+              }
+            }]
           }];
 
           var pbjs = pbjs || {};
@@ -116,6 +135,8 @@
             slot1 = googletag.defineSlot('/27721068/header_bidding', [300, 250], 'div-gpt-ad-1').addService(googletag.pubads());
             slot2 = googletag.defineSlot('/27721068/header_bidding', [300, 250], 'div-gpt-ad-2').addService(googletag.pubads());
             slot3 = googletag.defineSlot('/27721068/header_bidding', [300, 250], 'div-gpt-ad-3').addService(googletag.pubads());
+            slot4 = googletag.defineSlot('/27721068/header_bidding', [320, 50], 'div-gpt-ad-4').addService(googletag.pubads());
+            slot5 = googletag.defineSlot('/27721068/header_bidding', [320, 50], 'div-gpt-ad-5').addService(googletag.pubads());
             googletag.pubads().disableInitialLoad();
             googletag.enableServices();
           });
@@ -129,7 +150,14 @@
         <h4>- Audience Network -</h4>
         <h4>- DFP Lazy Loading -</h4>
       </div>
-      <hr>
+      <hr class="anchor">
+      <div class="adSlot5" style='height:50px; width:320px;'>
+        <div id='div-gpt-ad-5' style='height:50px; width:320px;'>
+          <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-5'); });
+          </script>
+        </div>
+      </div>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       <hr>
       <div class="adSlot1" style='height:250px; width:300px;'>
@@ -161,12 +189,20 @@
       </div>
       <hr>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
+      <div class="adSlot4" style='height:50px; width:320px;'>
+        <div id='div-gpt-ad-4' style='height:50px; width:320px;'>
+          <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-4'); });
+          </script>
+        </div>
+      </div>
     </body>
     <script>
       var refreshed1 = false;
       var refreshed2 = false;
       var refreshed3 = false;
+      var refreshed4 = false;
+      var refreshed5 = false;
 
       var listener1 = function() {
         if (window.scrollY >= div1H1 && !refreshed1) {
@@ -205,7 +241,46 @@
           window.removeEventListener('scroll', listener3);
         }
       }
+
+      var listener4 = function() {
+        if (window.scrollY >= div4H4 && !refreshed4) {
+          googletag.cmd.push(function() {
+            googletag.pubads().refresh([slot4]);
+          });
+
+          refreshed4 = true;
+
+          window.removeEventListener('scroll', listener4);
+        }
+      }
+
+      var listener5 = function() {
+        if (window.scrollY >= div5H5 && !refreshed5) {
+          googletag.cmd.push(function() {
+            googletag.pubads().refresh([slot5]);
+          });
+
+          refreshed5 = true;
+
+          window.removeEventListener('scroll', listener5);
+        }
+      }
       window.addEventListener('scroll', listener1);
+      window.addEventListener('scroll', listener4);
+      window.addEventListener('scroll', listener5);
+
+      var listener52 = function(){
+            var window_top = window.scrollY;
+            var div_top = document.querySelector(".anchor").offsetTop;
+            console.log(div_top);
+            if (window_top > div_top){
+                $(".adSlot5").addClass("sticky");
+            }else {
+                $(".adSlot5").removeClass("sticky");
+              }
+      }
+
+      window.addEventListener('scroll', listener52);
 
       var div1 = document.querySelector(".adSlot1");
       var div1H = div1.offsetTop;
@@ -218,6 +293,14 @@
       var div3 = document.querySelector(".adSlot3");
       var div3H = div3.offsetTop;
       var div3H3 = div3H - 300;
+
+      var div4 = document.querySelector(".adSlot4");
+      var div4H4 = 1;
+
+      var div5 = document.querySelector(".adSlot5");
+      var div5H5 = 1;
+
+
     </script>
 
 

@@ -10,6 +10,29 @@ html {
 }
 
 .adSlot1, .adSlot2, .adSlot3 {
-  background-color: grey;
+  background-color: white;
   margin: auto;
+}
+
+.adSlot4 {
+  margin: auto;
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+  z-index: 1000;
+  left: 0;
+  right: 0;
+}
+
+.adSlot5 {
+  left: 0;
+  right: 0;
+  background-color: white;
+  margin: auto;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
 }
