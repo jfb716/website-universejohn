@@ -22,7 +22,8 @@
               bids: [{
                   bidder: 'audienceNetwork',
                   params: {
-                     placementId: '118220978561571_429341210782878'
+                     placementId: '118220978561571_429341210782878',
+                     format: 'fullwidth'
                   }
               }]
           },{
@@ -122,7 +123,7 @@
 
         <script>
           var slot1, slot2, slot3; + googletag.cmd.push(function() {
-            slot1 = googletag.defineSlot('/27721068/header_bidding', [300, 250], 'div-gpt-ad-1').addService(googletag.pubads());
+            slot1 = googletag.defineSlot('/27721068/header_bidding', [301, 250], 'div-gpt-ad-1').addService(googletag.pubads());
             slot2 = googletag.defineSlot('/27721068/header_bidding', [300, 250], 'div-gpt-ad-2').addService(googletag.pubads());
             slot3 = googletag.defineSlot('/27721068/header_bidding', [300, 250], 'div-gpt-ad-3').addService(googletag.pubads());
             slot4 = googletag.defineSlot('/27721068/header_bidding', [320, 50], 'div-gpt-ad-4').addService(googletag.pubads());
