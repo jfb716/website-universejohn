@@ -22,8 +22,7 @@
               bids: [{
                   bidder: 'audienceNetwork',
                   params: {
-                     placementId: '118220978561571_429341210782878',
-                     format: 'fullwidth'
+                     placementId: '118220978561571_429341210782878'
                   }
               }]
           },{
@@ -33,6 +32,7 @@
                   bidder: 'audienceNetwork',
                   params: {
                      placementId: '118220978561571_429341297449536',
+                     format: 'native'
                   }
               }]
           },{
@@ -41,7 +41,8 @@
               bids: [{
                   bidder: 'audienceNetwork',
                   params: {
-                     placementId: '118220978561571_429341410782858'
+                     placementId: '118220978561571_429341410782858',
+                     format: 'fullwidth'
                   }
               }]
           },{
