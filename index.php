@@ -10,9 +10,7 @@
         <title>UniverseJohn</title>
         <link rel="stylesheet" href="style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-        </script>
-
+        <script src="script.js"></script>
       <script>
           var PREBID_TIMEOUT = 2000;
 
