@@ -20,7 +20,7 @@
               bids: [{
                   bidder: 'audienceNetwork',
                   params: {
-                     placementId: '118220978561571_429341210782878'
+                     placementId: '154187914959322_519264628451647'
                   }
               }]
           },{
@@ -29,7 +29,7 @@
               bids: [{
                   bidder: 'audienceNetwork',
                   params: {
-                     placementId: '118220978561571_429341297449536',
+                     placementId: '154187914959322_519264685118308',
                      format: 'native'
                   }
               }]
@@ -39,7 +39,7 @@
               bids: [{
                   bidder: 'audienceNetwork',
                   params: {
-                     placementId: '118220978561571_429341410782858',
+                     placementId: '154187914959322_519264768451633',
                      format: 'fullwidth'
                   }
               }]
@@ -49,7 +49,7 @@
             bids: [{
               bidder: 'audienceNetwork',
               params: {
-                placementId: '118220978561571_429550137428652'
+                placementId: '154187914959322_519264398451670'
               }
             }]
           },{
@@ -58,7 +58,7 @@
             bids: [{
               bidder: 'audienceNetwork',
               params: {
-                placementId: '118220978561571_429556677427998'
+                placementId: '154187914959322_519264541784989'
               }
             }]
           }];
@@ -121,8 +121,10 @@
         <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
 
         <script>
+
+
           var slot1, slot2, slot3; + googletag.cmd.push(function() {
-            slot1 = googletag.defineSlot('/27721068/header_bidding', [300, 250], 'div-gpt-ad-1').addService(googletag.pubads());
+            slot1 = googletag.defineSlot('/27721068/header_bidding', [300, 250], 'div-gpt-ad-1').setForceSafeFrame(true).setSafeFrameConfig({sandbox: true}).addService(googletag.pubads());
             slot2 = googletag.defineSlot('/27721068/header_bidding', [301, 250], 'div-gpt-ad-2').addService(googletag.pubads());
             slot3 = googletag.defineSlot('/27721068/header_bidding', [302, 250], 'div-gpt-ad-3').addService(googletag.pubads());
             slot4 = googletag.defineSlot('/27721068/header_bidding', [320, 50], 'div-gpt-ad-4').addService(googletag.pubads());
@@ -151,7 +153,7 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       <hr>
       <h4>- Standard 300x250 -</h4>
-      <div class="adSlot1">
+      <div class="adSlot1" style='height:250px; width:300px;'>
         <div id='div-gpt-ad-1' style='height:250px; width:300px;'>
           <script>
             googletag.cmd.push(function() { googletag.display('div-gpt-ad-1'); });
@@ -173,7 +175,7 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       <hr>
       <h4>- Standard Fullwidth -</h4>
-      <div class="adSlot3" style='height:250px; width:300px;'>
+      <div class="adSlot3">
         <div id='div-gpt-ad-3' style='height:250px; width:300px;'>
           <script>
             googletag.cmd.push(function() { googletag.display('div-gpt-ad-3'); });
