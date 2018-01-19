@@ -99,6 +99,7 @@
           pbjs.que.push(function() {
               pbjs.addAdUnits(adUnits);
               pbjs.requestBids({
+                  adUnitCodes: ['div-gpt-ad-1', 'div-gpt-ad-4', 'div-gpt-ad-5'],
                   bidsBackHandler: sendAdserverRequest
               });
           });
@@ -124,7 +125,7 @@
 
 
           var slot1, slot2, slot3; + googletag.cmd.push(function() {
-            slot1 = googletag.defineSlot('/27721068/header_bidding', [300, 250], 'div-gpt-ad-1').setForceSafeFrame(true).setSafeFrameConfig({sandbox: true}).addService(googletag.pubads());
+            slot1 = googletag.defineSlot('/27721068/header_bidding', [300, 250], 'div-gpt-ad-1').addService(googletag.pubads());
             slot2 = googletag.defineSlot('/27721068/header_bidding', [301, 250], 'div-gpt-ad-2').addService(googletag.pubads());
             slot3 = googletag.defineSlot('/27721068/header_bidding', [302, 250], 'div-gpt-ad-3').addService(googletag.pubads());
             slot4 = googletag.defineSlot('/27721068/header_bidding', [320, 50], 'div-gpt-ad-4').addService(googletag.pubads());
@@ -194,19 +195,41 @@
     </body>
     <script>
 
+        function refreshBid4() {
+         pbjs.que.push(function() {
+           pbjs.requestBids({
+             timeout: 600,
+             adUnitCodes: ['div-gpt-ad-2'],
+             bidsBackHandler: function() {
+               pbjs.setTargetingForGPTAsync(['div-gpt-ad-2']);
+               googletag.pubads().refresh([slot2]);
+             }
+           });
+         });
+       }
+
+       function refreshBid5() {
+        pbjs.que.push(function() {
+          pbjs.requestBids({
+            timeout: 600,
+            adUnitCodes: ['div-gpt-ad-3'],
+            bidsBackHandler: function() {
+              pbjs.setTargetingForGPTAsync(['div-gpt-ad-3']);
+              googletag.pubads().refresh([slot3]);
+            }
+          });
+        });
+      }
+
       var refreshed2 = false;
       var refreshed3 = false;
 
       var listener = function() {
         if (window.scrollY >= div2H2 && !refreshed2) {
-          googletag.cmd.push(function() {
-            googletag.pubads().refresh([slot2]);
-          });
+          refreshBid4();
           refreshed2 = true;
         } else if (window.scrollY >= div3H3 && !refreshed3) {
-          googletag.cmd.push(function() {
-            googletag.pubads().refresh([slot3]);
-          });
+          refreshBid5();
           refreshed3 = true;
           window.removeEventListener('scroll', listener);
         };
@@ -228,6 +251,7 @@
       var div2 = document.querySelector(".adSlot2");
       var div2H = div2.offsetTop;
       var div2H2 = div2H - 600;
+
 
       var div3 = document.querySelector(".adSlot3");
       var div3H = div3.offsetTop;
