@@ -139,9 +139,9 @@
     <body>
       <hr>
       <div class="details">
-        <h4>- Prebid.js v28 -</h4>
+        <h4>- Prebid.js v1.1.1 -</h4>
         <h4>- Audience Network Formats -</h4>
-        <h4>- DFP Lazy Loading & Adhesions -</h4>
+        <h4>- DFP & Prebid Lazy Loading w/ Adhesions -</h4>
       </div>
       <hr class="anchor">
       <div class="adSlot5" style='height:50px; width:320px;'>
