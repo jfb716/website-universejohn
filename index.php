@@ -140,8 +140,11 @@
       <hr>
       <div class="details">
         <h4>- Prebid.js v1.1.1 -</h4>
-        <h4>- Audience Network Formats -</h4>
-        <h4>- DFP & Prebid Lazy Loading w/ Adhesions -</h4>
+        <h4>- Audience Network Bidder -</h4>
+        <h4>- 300x250 - 320x50 - Native - Fullwidth -</h4>
+        <h4>- Top and Bottom Adhesion -</h4>
+        <h4>- Prebid Lazy Loading -</h4>
+        <h4>- DFP Lazy Loading -</h4>
       </div>
       <hr class="anchor">
       <div class="adSlot5" style='height:50px; width:320px;'>
