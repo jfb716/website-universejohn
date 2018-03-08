@@ -180,7 +180,7 @@
       <hr>
       <h4>- Standard Fullwidth -</h4>
       <div class="adSlot3">
-        <div id='div-gpt-ad-3' style='height:250px; width:300px;'>
+        <div id='div-gpt-ad-3'>
           <script>
             googletag.cmd.push(function() { googletag.display('div-gpt-ad-3'); });
           </script>
