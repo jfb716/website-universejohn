@@ -139,7 +139,7 @@
     <body>
       <hr>
       <div class="details">
-        <h4>- Prebid.js v1.1.1 -</h4>
+        <h4>- Prebid.js v1.11.0 -</h4>
         <h4>- Audience Network Bidder -</h4>
         <h4>- 300x250 - 320x50 - Native - Fullwidth -</h4>
         <h4>- Top and Bottom Adhesion -</h4>
