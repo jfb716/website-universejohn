@@ -3,9 +3,9 @@
   line-height: 2px;
 }
 
-html {
-  background-color: #292b2c;
-  color: white;
+html, body {
+  background-color: #292b2c !important;
+  color: white !important;
   text-align: center;
 }
 
