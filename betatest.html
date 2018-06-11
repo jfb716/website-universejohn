@@ -8,15 +8,29 @@
         <meta name="description" content="Test Site for John F. Black">
         <meta name="keywords" content="John, John Black, John F Black, John F. Black, John Francis Black, Test Site, Test, Synacor, Facebook, NBC, NBCUniversal, LocalEdge, Buffalo, New York, New York City, NYC, Grand Island, University at Buffalo, UB, Technical Support, Ad Operations, AdOps, AdTech">
         <title>UniverseJohn</title>
-        <link rel="stylesheet" media="screen and (max-width: 450px)" href="mobilestyles.css">
-        <link rel="stylesheet" media="screen and (min-width: 451px)" href="desktopstyles.css">
+        <link rel="stylesheet" media="screen and (max-width: 450px)" href="css/mobilestyles.css">
+        <link rel="stylesheet" media="screen and (min-width: 451px)" href="css/desktopstyles.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="script.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
       <script>
           var PREBID_TIMEOUT = 2000;
+          
+          var mobileVar = window.matchMedia("(max-width: 450px)");
+          
+          
+          if(mobileVar.matches){
+            var topStickPID = '154187914959322_519264398451670';
+            var botStickPID = '154187914959322_519264541784989';
+            var fwPID = '154187914959322_519264768451633';
+            var mrPID = '154187914959322_519264628451647';
+            var natPID = '154187914959322_519264685118308';
+          } else {
+            var mrPID = '154187914959322_575492439495532';
+            var natPID = '154187914959322_575492552828854';
+          }
+          
 
           var adUnits = [{
               code: 'div-gpt-ad-1',
@@ -24,16 +38,16 @@
               bids: [{
                   bidder: 'audienceNetwork',
                   params: {
-                     placementId: '154187914959322_519264628451647'
+                     placementId: mrPID
                   }
               }]
           },{
               code: 'div-gpt-ad-2',
-              sizes: [[300, 250]],
+              sizes: [[300, 150]],
               bids: [{
                   bidder: 'audienceNetwork',
                   params: {
-                     placementId: '154187914959322_519264685118308',
+                     placementId: natPID,
                      format: 'native'
                   }
               }]
@@ -43,17 +57,21 @@
               bids: [{
                   bidder: 'audienceNetwork',
                   params: {
-                     placementId: '154187914959322_519264768451633',
+                     placementId: fwPID,
                      format: 'fullwidth'
                   }
               }]
-          },{
+          },
+             
+                         
+                         
+                         {
             code: 'div-gpt-ad-4',
             sizes: [[320, 50]],
             bids: [{
               bidder: 'audienceNetwork',
               params: {
-                placementId: '154187914959322_519264398451670'
+                placementId: topStickPID
               }
             }]
           },{
@@ -62,17 +80,18 @@
             bids: [{
               bidder: 'audienceNetwork',
               params: {
-                placementId: '154187914959322_519264541784989'
+                placementId: botStickPID
               }
             }]
-          }];
+          }
+          ];
 
           var pbjs = pbjs || {};
           pbjs.que = pbjs.que || [];
 
         </script>
 
-        <script type="text/javascript" src="prebidProd.js" async></script>
+        <script type="text/javascript" src="js/prebidBeta.js" async></script>
         <script>
           var googletag = googletag || {};
           googletag.cmd = googletag.cmd || [];
@@ -99,16 +118,29 @@
                                     return '20.00';
                                 }
                             }]}};
-
-          pbjs.que.push(function() {
-              pbjs.addAdUnits(adUnits);
-              pbjs.requestBids({
+            
+            if(mobileVar.matches){
+                pbjs.que.push(function() {
+                pbjs.addAdUnits(adUnits);
+                pbjs.requestBids({
                   adUnitCodes: ['div-gpt-ad-1', 'div-gpt-ad-4', 'div-gpt-ad-5'],
                   bidsBackHandler: sendAdserverRequest
-              });
-          });
+                    });
+                });
+            } else {
+                pbjs.que.push(function() {
+                      pbjs.addAdUnits(adUnits);
+                      pbjs.requestBids({
+                          adUnitCodes: ['div-gpt-ad-1', 'div-gpt-ad-2'],
+                          bidsBackHandler: sendAdserverRequest
+                      });
+                  });
+            }
 
-          function sendAdserverRequest() {
+          
+
+          if(mobileVar.matches){
+              function sendAdserverRequest() {
               if (pbjs.adserverRequestSent) return;
               pbjs.adserverRequestSent = true;
               googletag.cmd.push(function() {
@@ -116,9 +148,22 @@
                       pbjs.setTargetingForGPTAsync();
                       googletag.pubads().refresh([slot1, slot4, slot5]);
                   });});};
+          } else {
+              function sendAdserverRequest() {
+              if (pbjs.adserverRequestSent) return;
+              pbjs.adserverRequestSent = true;
+              googletag.cmd.push(function() {
+                  pbjs.que.push(function() {
+                      pbjs.setTargetingForGPTAsync();
+                      googletag.pubads().refresh([slot1, slot2]);
+                  });});};
+          }
 
           setTimeout(function() {
               sendAdserverRequest();
+              var wVersion = window.pbjs.version;
+              console.log("Wrapper Version: " + wVersion);
+              $(".wrapVersion").html(wVersion); 
           }, PREBID_TIMEOUT);
 
         </script>
@@ -127,29 +172,38 @@
 
         <script>
 
-
-          var slot1, slot2, slot3; + googletag.cmd.push(function() {
-            slot1 = googletag.defineSlot('/27721068/header_bidding', [300, 250], 'div-gpt-ad-1').addService(googletag.pubads());
-            slot2 = googletag.defineSlot('/27721068/header_bidding', [301, 250], 'div-gpt-ad-2').addService(googletag.pubads());
-            slot3 = googletag.defineSlot('/27721068/header_bidding', [302, 250], 'div-gpt-ad-3').addService(googletag.pubads());
-            slot4 = googletag.defineSlot('/27721068/header_bidding', [320, 50], 'div-gpt-ad-4').addService(googletag.pubads());
-            slot5 = googletag.defineSlot('/27721068/header_bidding', [320, 50], 'div-gpt-ad-5').addService(googletag.pubads());
-            googletag.pubads().disableInitialLoad();
-            googletag.enableServices();
-          });
+                var slot1, slot2, slot3; + googletag.cmd.push(function() {
+                slot1 = googletag.defineSlot('/27721068/header_bidding', [300, 250], 'div-gpt-ad-1').addService(googletag.pubads());
+                slot2 = googletag.defineSlot('/27721068/header_bidding', [301, 250], 'div-gpt-ad-2').addService(googletag.pubads());
+                slot3 = googletag.defineSlot('/27721068/header_bidding', [302, 250], 'div-gpt-ad-3').addService(googletag.pubads());
+                slot4 = googletag.defineSlot('/27721068/header_bidding', [320, 50], 'div-gpt-ad-4').addService(googletag.pubads());
+                slot5 = googletag.defineSlot('/27721068/header_bidding', [320, 50], 'div-gpt-ad-5').addService(googletag.pubads());
+                googletag.pubads().disableInitialLoad();
+                googletag.enableServices();
+              });
+            
+          
         </script>
-
+        
     </head>
     <body>
       <hr>
-      <div class="details">
-        <h4>- Prebid.js v1.11.0 -</h4>
+      <div class="details mobUnit">
+        <h4>- Prebid.js <span class="wrapVersion">....</span> -</h4>
         <h4>- Audience Network Bidder -</h4>
         <h4>- 300x250 - 320x50 - Native - Fullwidth -</h4>
         <h4>- Top and Bottom Adhesion -</h4>
         <h4>- Prebid Lazy Loading -</h4>
         <h4>- DFP Lazy Loading -</h4>
+        <h4>- Mobile Test -</h4>
       </div>
+      <div class="details deskUnit">
+        <h4>- Prebid.js <span class="wrapVersion">....</span> -</h4>
+        <h4>- Audience Network Bidder -</h4>
+        <h4>- 300x250 - Native -</h4>
+        <h4>- Desktop Test -</h4>
+      </div>
+      <div class="mobUnit">
       <hr class="anchor">
       <div class="adSlot5" style='height:50px; width:320px;'>
         <div id='div-gpt-ad-5' style='height:50px; width:320px;'>
@@ -159,6 +213,7 @@
         </div>
       </div>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
       <hr>
       <h4>- Standard 300x250 -</h4>
       <div class="adSlot1" style='height:250px; width:300px;'>
@@ -182,9 +237,10 @@
       <hr>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       <hr>
+      <div class="mobUnit">
       <h4>- Standard Fullwidth -</h4>
-      <div class="adSlot3">
-        <div id='div-gpt-ad-3'>
+      <div class="adSlot3" style='height: 250px; width: 300px;'>
+        <div id='div-gpt-ad-3' style='height: 250px; width: 300px;'>
           <script>
             googletag.cmd.push(function() { googletag.display('div-gpt-ad-3'); });
           </script>
@@ -198,6 +254,7 @@
             googletag.cmd.push(function() { googletag.display('div-gpt-ad-4'); });
           </script>
         </div>
+      </div>
       </div>
     </body>
     <script>
@@ -227,8 +284,8 @@
           });
         });
       }
-
-      var refreshed2 = false;
+      if(mobileVar.matches){
+          var refreshed2 = false;
       var refreshed3 = false;
 
       var listener = function() {
@@ -263,6 +320,9 @@
       var div3 = document.querySelector(".adSlot3");
       var div3H = div3.offsetTop;
       var div3H3 = div3H - 600;
+      };
+      
 
     </script>
+    <script src="js/script.js"></script>
 </html>

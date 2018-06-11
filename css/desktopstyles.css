@@ -1,9 +1,12 @@
+.mobUnit {
+    display: none
+}
 .details {
   text-align: center;
   line-height: 2px;
 }
 
-html, body {
+html, body{
   background-color: #292b2c !important;
   color: white !important;
   text-align: center;
@@ -35,4 +38,22 @@ html, body {
   position: fixed;
   top: 0;
   z-index: 1000;
+}
+
+.jumbotron {
+  margin: 100px !important;
+}
+
+a {
+    color: white !important;
+    font-size: 20px;
+}
+
+button {
+    margin: 20px !important;
+}
+
+.emu {
+    color: black !important;
+    font-weight: 800 !important;
 }
