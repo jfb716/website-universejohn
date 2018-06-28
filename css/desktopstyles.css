@@ -10,9 +10,10 @@ html, body{
   background-color: #292b2c !important;
   color: white !important;
   text-align: center;
+
 }
 
-.adSlot1, .adSlot2, .adSlot3 {
+.adSlot1, .adSlot2, .adSlot3, .adSlot6 {
   background-color: white;
   margin: auto;
 }

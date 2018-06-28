@@ -30,6 +30,7 @@
           } else {
             var mrPID = '154187914959322_575492439495532';
             var natPID = '154187914959322_575492552828854';
+            var hpPID = '154187914959322_605028143208628';
           }
           
 
@@ -49,6 +50,16 @@
                   bidder: 'audienceNetwork',
                   params: {
                      placementId: natPID,
+                     format: 'native'
+                  }
+              }]
+          },{
+              code: 'div-gpt-ad-6',
+              sizes: [[300, 600]],
+              bids: [{
+                  bidder: 'audienceNetwork',
+                  params: {
+                     placementId: hpPID,
                      format: 'native'
                   }
               }]
@@ -128,7 +139,7 @@
                 pbjs.que.push(function() {
                       pbjs.addAdUnits(adUnits);
                       pbjs.requestBids({
-                          adUnitCodes: ['div-gpt-ad-1', 'div-gpt-ad-2'],
+                          adUnitCodes: ['div-gpt-ad-1', 'div-gpt-ad-2', 'div-gpt-ad-6'],
                           bidsBackHandler: sendAdserverRequest
                       });
                   });
@@ -152,7 +163,7 @@
               googletag.cmd.push(function() {
                   pbjs.que.push(function() {
                       pbjs.setTargetingForGPTAsync();
-                      googletag.pubads().refresh([slot1, slot2]);
+                      googletag.pubads().refresh([slot1, slot2, slot6]);
                   });});};
               
           }
@@ -179,6 +190,7 @@
                 slot3 = googletag.defineSlot('/27721068/header_bidding', [302, 250], 'div-gpt-ad-3').addService(googletag.pubads());
                 slot4 = googletag.defineSlot('/27721068/header_bidding', [320, 50], 'div-gpt-ad-4').addService(googletag.pubads());
                 slot5 = googletag.defineSlot('/27721068/header_bidding', [320, 50], 'div-gpt-ad-5').addService(googletag.pubads());
+                slot6 = googletag.defineSlot('/27721068/header_bidding', [300, 6000], 'div-gpt-ad-5').addService(googletag.pubads());
                 googletag.pubads().disableInitialLoad();
                 googletag.enableServices();
               });
@@ -201,7 +213,7 @@
       <div class="details deskUnit">
         <h4>- Prebid.js <span class="wrapVersion">....</span> -</h4>
         <h4>- Audience Network Bidder -</h4>
-        <h4>- 300x250 - Native -</h4>
+        <h4>- 300x250 - Native - 300x600 -</h4>
         <h4>- Desktop Test -</h4>
       </div>
       <div class="mobUnit">
@@ -257,6 +269,21 @@
         </div>
       </div>
       </div>
+        
+    <div class="deskUnit">
+      <h4>- Standard 300x600 -</h4>
+      <div class="adSlot6" style="height: 600px; width: 300px;">
+        <div id='div-gpt-ad-6'>
+          <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-6'); });
+          </script>
+        </div>
+      </div>
+      <hr>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      
+      </div>
+        
     </body>
     <script>
 
