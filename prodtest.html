@@ -172,6 +172,7 @@
               pbjs.adserverRequestSent = true;
               googletag.cmd.push(function() {
                   pbjs.que.push(function() {
+                      pbjs.setConfig({ priceGranularity: "high" });
                       pbjs.setTargetingForGPTAsync();
                       googletag.pubads().refresh([slot1, slot4, slot5]);
                   });});};
@@ -181,6 +182,7 @@
               pbjs.adserverRequestSent = true;
               googletag.cmd.push(function() {
                   pbjs.que.push(function() {
+                      pbjs.setConfig({ priceGranularity: "high" });
                       pbjs.setTargetingForGPTAsync();
                       googletag.pubads().refresh([slot1, slot2, slot6, slot7]);
                   });});};
