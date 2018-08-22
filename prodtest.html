@@ -17,10 +17,10 @@
 
       <script>
           var PREBID_TIMEOUT = 2000;
-          
+
           var mobileVar = window.matchMedia("(max-width: 450px)");
-          
-          
+
+
           if(mobileVar.matches){
             var topStickPID = '154187914959322_519264398451670';
             var botStickPID = '154187914959322_519264541784989';
@@ -33,7 +33,7 @@
             var hpPID = '154187914959322_625062684538507';
             var bbPID = '154187914959322_625063251205117';
           }
-          
+
 
           var adUnits = [{
               code: 'div-gpt-ad-1',
@@ -145,7 +145,7 @@
                                     return '20.00';
                                 }
                             }]}};
-            
+
             if(mobileVar.matches){
                 pbjs.que.push(function() {
                 pbjs.addAdUnits(adUnits);
@@ -164,7 +164,7 @@
                   });
             }
 
-          
+
 
           if(mobileVar.matches){
               function sendAdserverRequest() {
@@ -186,16 +186,16 @@
                       pbjs.setTargetingForGPTAsync();
                       googletag.pubads().refresh([slot1, slot2, slot6, slot7]);
                   });});};
-              
+
           }
 
           setTimeout(function() {
               sendAdserverRequest();
               var wVersion = window.pbjs.version;
               console.log("Wrapper Version: " + wVersion);
-              $(".wrapVersion").html(wVersion); 
+              $(".wrapVersion").html(wVersion);
           }, PREBID_TIMEOUT);
-               
+
 
 
 
@@ -217,10 +217,10 @@
                 googletag.pubads().disableInitialLoad();
                 googletag.enableServices();
               });
-            
-          
+
+
         </script>
-        
+
     </head>
     <body>
       <hr>
@@ -271,10 +271,10 @@
           </script>
         </div>
       </div>
-      
+
       <hr>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      
+
       <hr>
       </div>
       <div class="mobUnit">
@@ -286,7 +286,7 @@
           </script>
         </div>
       </div>
-      
+
       <hr>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
@@ -310,7 +310,7 @@
         </div>
       </div>
       </div>
-        
+
     <div class="deskUnit">
       <h4>- Standard 300x600 -</h4>
       <div class="adSlot6" style="height: 600px; width: 300px;">
@@ -333,7 +333,7 @@
       <hr>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
-        
+
     </body>
     <script>
 
@@ -400,7 +400,7 @@
           var div3H = div3.offsetTop;
           var div3H3 = div3H - 600;
       };
-      
+
 
     </script>
     <script src="js/script.js"></script>
